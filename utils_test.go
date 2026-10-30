@@ -44,3 +44,37 @@ func TestValidatePathIsDirectory(t *testing.T) {
 		t.Errorf("path: %s expects false", path)
 	}
 }
+
+func TestIsFlacFile(t *testing.T) {
+	pathFlac := "some_file.flac"
+	var got = isFlacFile(pathFlac)
+	var want = true
+	if got != want {
+		t.Errorf("path: %s is flac file", pathFlac)
+	}
+
+	pathMp3 := "some_file.mp3"
+	got = isFlacFile(pathMp3)
+	want = false
+	if got != want {
+		t.Errorf("path: %s is no flac", pathMp3)
+	}
+}
+
+func TestGetFileNameFromPath(t *testing.T) {
+	var path = "/home/radek/Music/01 Exemption.flac"
+	var want = "01 Exemption.flac"
+	var got = getFileNameFromPath(path)
+
+	if got != want {
+		t.Errorf("%s != %s", want, got)
+	}
+
+	path = "/home/radek/Music"
+	want = ""
+	got = getFileNameFromPath(path)
+
+	if got != want {
+		t.Errorf("%s != %s", want, got)
+	}
+}
